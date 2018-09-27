@@ -10,30 +10,35 @@ lazy val endpointsVersion = "0.6.0"
 val circeVersion = "0.9.3"
 
 lazy val endpointsAlgebra = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
+lazy val endpointsGeneric = "org.julienrf" %% "endpoints-json-schema-generic" % endpointsVersion
+lazy val endpointsOpenApi = "org.julienrf" %% "endpoints-openapi" % endpointsVersion
 lazy val endpointsCirce = Seq(
   "org.julienrf" %% "endpoints-algebra-circe" % endpointsVersion,
+  "org.julienrf" %% "endpoints-json-schema-circe" % endpointsVersion,
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion
 )
 lazy val endpointsDependencies = Seq(
-  // core API
   endpointsAlgebra,
-  // Akka-http server backend
-  "org.julienrf" %% "endpoints-akka-http-server" % endpointsVersion
+  endpointsOpenApi,
+  endpointsGeneric
 ) ++ endpointsCirce
 
 lazy val apimodels = (project in file("apimodels"))
   .settings(
     commonSettings,
-    libraryDependencies ++= (endpointsAlgebra +: endpointsCirce)
+    libraryDependencies ++= (endpointsGeneric +: endpointsOpenApi +: endpointsAlgebra +: endpointsCirce)
   )
 
 lazy val apiserver = (project in file("apiserver"))
   .dependsOn(apimodels)
   .settings(
     commonSettings,
-    libraryDependencies ++= endpointsDependencies
+    libraryDependencies ++= endpointsDependencies,
+    libraryDependencies ++= Seq(
+      "org.julienrf" %% "endpoints-akka-http-server" % endpointsVersion
+    )
   )
 
 lazy val root = (project in file("."))

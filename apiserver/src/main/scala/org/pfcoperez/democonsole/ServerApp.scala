@@ -3,7 +3,6 @@ package org.pfcoperez.democonsole
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import org.pfcoperez.democonsole.allocators.Server
 
 object ServerApp extends App {
 
