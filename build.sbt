@@ -28,7 +28,11 @@ lazy val endpointsDependencies = Seq(
 lazy val apimodels = (project in file("apimodels"))
   .settings(
     commonSettings,
-    libraryDependencies ++= (endpointsGeneric +: endpointsOpenApi +: endpointsAlgebra +: endpointsCirce)
+    libraryDependencies ++= Seq(
+      endpointsGeneric,
+      endpointsOpenApi,
+      endpointsAlgebra
+    )
   )
 
 lazy val apiserver = (project in file("apiserver"))

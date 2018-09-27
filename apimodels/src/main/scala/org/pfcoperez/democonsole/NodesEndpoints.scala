@@ -1,12 +1,10 @@
 package org.pfcoperez.democonsole
 
-import endpoints.algebra.Endpoints
 import endpoints.{algebra, generic}
-import io.circe.generic.auto._
 
-trait NodesEndpoints extends Endpoints
-  with algebra.JsonSchemaEntities
-  with generic.JsonSchemas {
+trait NodesEndpoints extends algebra.Endpoints
+    with algebra.JsonSchemaEntities
+    with generic.JsonSchemas {
 
   import NodesEndpoints._
 
