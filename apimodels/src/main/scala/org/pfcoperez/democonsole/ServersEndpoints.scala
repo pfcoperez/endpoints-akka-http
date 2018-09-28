@@ -12,7 +12,7 @@ trait ServersEndpoints extends algebra.Endpoints
   final def serversBasePath: Path[Unit] = base / "platform" / "servers"
 
   val servers = endpoint(get(serversBasePath), jsonResponse[Seq[Server]]())
-  val server = endpoint(get(serversBasePath /? qs[String]("id", Some("Server identifier"))), jsonResponse[Server]())
+  val server = endpoint(get(serversBasePath / segment[String]("id", Some("Server identifier"))), jsonResponse[Server]())
 
   val serverRoutes = Seq(servers, server)
 

@@ -12,7 +12,7 @@ trait NodesEndpoints extends algebra.Endpoints
   final def nodesBasePath: Path[Unit] = base / "nodes"
 
   val nodes = endpoint(get(nodesBasePath), jsonResponse[Seq[Node]]())
-  val node = endpoint(get(nodesBasePath /? qs[String](name = "id", docs = Some("Node identifier"))), jsonResponse[Node]())
+  val node = endpoint(get(nodesBasePath / segment[String]("id", Some("Node identifier"))), jsonResponse[Node]())
 
   val nodesRoutes = Seq(nodes, node)
 

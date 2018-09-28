@@ -12,7 +12,7 @@ object ServerApp extends App {
 
   val routes = (new Server).route
 
-  val bindingFuture = Http().bindAndHandle(routes, "0.0.0.0", 8080)
+  val bindingFuture = Http().bindAndHandle(routes, "0.0.0.0", 9090)
 
   scala.io.StdIn.readLine() // let it run until user presses return
 
